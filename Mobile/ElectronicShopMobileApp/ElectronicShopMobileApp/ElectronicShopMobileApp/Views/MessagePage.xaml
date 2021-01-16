@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ElectronicShopMobileApp.Views.MessagePage"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <Grid>
+            <Image Source="bgMess.jpg" Aspect="Fill">
+
+            </Image>
+
+            <Frame  BackgroundColor="White" Padding="10" Margin="10" CornerRadius="10" VerticalOptions="Center" HasShadow="True">
+                <StackLayout>
+                    <Image Source="check.png" HeightRequest="100"></Image>
+                    <Label Text="{Binding Title}" HorizontalOptions="Center" Style="{x:StaticResource LabelTitleStyle}" FontAttributes="Bold" FontSize="26"></Label>
+                    <Label Text="{Binding Message}" Style="{x:StaticResource LabelTitleStyle}" FontSize="18" TextColor="Black" HorizontalTextAlignment="Center"></Label>
+                     
+                    <Frame Padding="0" HeightRequest="50" Margin="0,20,0,0">
+                       <Grid>
+                           <Image Source="radient.jpg" Aspect="Fill"></Image>
+                           <Button Text="VỀ TRANG CHỦ" Command="{Binding OnGoBackHomeCommand}"  BackgroundColor="Transparent" FontSize="20" TextColor="White">
+                                 <Button.Style>
+                                    <Style TargetType="Button"> 
+                                        <Style.Triggers>
+                                            <Trigger TargetType="Button"
+                                                    Property="IsPressed" Value="True"> 
+                                                <Setter Property="TextColor" Value="Black" />   
+                                            </Trigger>  
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style> 
+                            </Button>
+
+                       </Grid>
+                   </Frame>
+                </StackLayout>
+            </Frame>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

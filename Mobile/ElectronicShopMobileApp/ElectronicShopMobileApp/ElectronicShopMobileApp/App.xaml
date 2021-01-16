@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ElectronicShopMobileApp.App"
+             xmlns:Converter="clr-namespace:ElectronicShopMobileApp.Converter">
+    <Application.Resources>
+        <ResourceDictionary>
+            <Converter:ConvertStringToImage x:Key="ConvertStringToImage"></Converter:ConvertStringToImage>
+            <Converter:ConvertBooleanEvaluateToColor x:Key="ConvertBooleanEvaluateToColor"></Converter:ConvertBooleanEvaluateToColor>
+            <Converter:ConvertBooleanNewProductToColor x:Key="ConvertBooleanNewProductToColor"></Converter:ConvertBooleanNewProductToColor>
+            <Converter:ConvertBooleanLikeNewProductToColor x:Key="ConvertBooleanLikeNewProductToColor"></Converter:ConvertBooleanLikeNewProductToColor>
+            <Converter:ConvertDecimalToPriceString x:Key="ConvertDecimalToPriceString"></Converter:ConvertDecimalToPriceString>
+            <Converter:ConvertBooleanFavoriteProductToImage x:Key="ConvertBooleanFavoriteProductToImage"></Converter:ConvertBooleanFavoriteProductToImage>
+            <Converter:ConvertStarNumberToStarList x:Key="ConvertStarNumberToStarList"></Converter:ConvertStarNumberToStarList>
+            <Converter:ConvertBitStarNumberToStarIcon x:Key="ConvertBitStarNumberToStarIcon"></Converter:ConvertBitStarNumberToStarIcon>
+            <Converter:ConvertBooleanToCheckIcon x:Key="ConvertBooleanToCheckIcon"></Converter:ConvertBooleanToCheckIcon>
+            <Converter:ConvertProductListToStateListString x:Key="ConvertProductListToStateListString"></Converter:ConvertProductListToStateListString>
+            <Converter:ConvertProductListToVisibleBooleean x:Key="ConvertProductListToVisibleBooleean"></Converter:ConvertProductListToVisibleBooleean>
+            <Converter:ConvertBooleanCommentDisLikeStateToColor x:Key="ConvertBooleanCommentDisLikeStateToColor"></Converter:ConvertBooleanCommentDisLikeStateToColor>
+            <Converter:ConvertBooleanCommentLikeStateToColor x:Key="ConvertBooleanCommentLikeStateToColor"></Converter:ConvertBooleanCommentLikeStateToColor>
+            <Converter:ConvertProductListToProductListRight x:Key="ConvertProductListToProductListRight"></Converter:ConvertProductListToProductListRight>
+            <Converter:ConvertProductListToProductListLeft x:Key="ConvertProductListToProductListLeft"></Converter:ConvertProductListToProductListLeft>
+            <Converter:ConvertDescriptionToShortDescription x:Key="ConvertDescriptionToShortDescription"></Converter:ConvertDescriptionToShortDescription>
+            <Converter:ConvertProductIDToRandomImage x:Key="ConvertProductIDToRandomImage"></Converter:ConvertProductIDToRandomImage>
+            <Converter:ConverterBooleanIsFreeShipToText x:Key="ConverterBooleanIsFreeShipToText"></Converter:ConverterBooleanIsFreeShipToText>
+            <Converter:ConvertCommentsListToVisible x:Key="ConvertCommentsListToVisible"></Converter:ConvertCommentsListToVisible>
+            <Converter:ConvertCommentsListToVisibleLabel x:Key="ConvertCommentsListToVisibleLabel"></Converter:ConvertCommentsListToVisibleLabel>
+            <Converter:ConvertDisplayNameToSubDisplayname x:Key="ConvertDisplayNameToSubDisplayname"></Converter:ConvertDisplayNameToSubDisplayname>
+            <Converter:ConvertSourceToOpacity x:Key="ConvertSourceToOpacity"></Converter:ConvertSourceToOpacity>
+            <Converter:ConvertProductListToNotVisibleBooleean x:Key="ConvertProductListToNotVisibleBooleean"></Converter:ConvertProductListToNotVisibleBooleean>
+            <Converter:ConvertCartItemListToVisibleBooleean x:Key="ConvertCartItemListToVisibleBooleean"></Converter:ConvertCartItemListToVisibleBooleean>
+             
+            <OnPlatform x:Key="Avo"
+                        x:TypeArguments="x:String"
+                        iOS="UTMAvo"
+                        Android="UTMAvo.ttf#UTM Avo"/>
+            <OnPlatform x:Key="AvoBold"
+                        x:TypeArguments="x:String"
+                        iOS="UTMAvoBold"
+                        Android="UTMAvoBold.ttf#UTM Avo"/>
+            <Color x:Key="TextColorH">#ee4d2d</Color>
+            <Color x:Key="TextColorIcon">#3498db</Color>
+            <Color x:Key="BgColor">#f7f7f7</Color>
+            <Color x:Key="AccentColor">#90bc1b</Color>
+            <Color x:Key="TextColor">#323131</Color>
+            <Color x:Key="DarkAccentColor">#7ea710</Color>
+            <Color x:Key="MainColor">#fc6353</Color>
+            <Style TargetType="Label" x:Key="LabelDefaultStyle">
+                <Setter Property="FontFamily" Value="{StaticResource Avo}"/>
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="TextColor" Value="{StaticResource TextColorH}"/>
+            </Style>
+            <Style TargetType="Label" x:Key="LabelTitleStyle">
+                <Setter Property="FontFamily" Value="{StaticResource Avo}"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="TextColor" Value="{StaticResource TextColorH}"/>
+            </Style>
+            <Style TargetType="Label" x:Key="LabelWellcomeStyle">
+                <Setter Property="FontFamily" Value="{StaticResource Avo}"/>
+                <Setter Property="FontSize" Value="25"/>
+                <Setter Property="TextColor" Value="{StaticResource TextColorH}"/>
+                <Setter Property="HorizontalTextAlignment" Value="Start"/>
+                <Setter Property="FontAttributes" Value="Bold"></Setter>
+                <Setter Property="Margin" Value="10,20,0,0"></Setter>
+            </Style>
+            <Style TargetType="Label" x:Key="LabelProfileStyle">
+                <Setter Property="FontFamily" Value="{StaticResource Avo}"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="TextColor" Value="{StaticResource TextColorH}"/>  
+            </Style>
+            <Style TargetType="Button" x:Key="ButtonProfileStyle">
+                <Setter Property="FontFamily" Value="{StaticResource Avo}"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="TextColor" Value="{StaticResource TextColorH}"/>  
+                <Setter Property="Margin" Value="-10,-10,0,0"/>  
+                <Setter Property="BackgroundColor" Value="Transparent"/>  
+                <Setter Property="HorizontalOptions" Value="Start"/>  
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

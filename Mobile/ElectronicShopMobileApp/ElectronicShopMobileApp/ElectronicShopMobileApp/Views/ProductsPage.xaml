@@ -1,0 +1,393 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ElectronicShopMobileApp.Views.ProductsPage"
+             x:Name="MyProductsPage"
+             xmlns:Controls="clr-namespace:ElectronicShopMobileApp.Controls"
+             xmlns:Behaviors="clr-namespace:ElectronicShopMobileApp.Assets.Contains.Behavior"
+             xmlns:Fonts="clr-namespace:ElectronicShopMobileApp.Assets.Font"
+             NavigationPage.HasNavigationBar="False"
+             >
+    <ContentPage.Content> 
+            <AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"> 
+                <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
+                             AbsoluteLayout.LayoutFlags="All"
+                             x:Name="StackLayoutProducts"
+                             Padding="10,30,10,0">
+                    
+                    <Label Text="{Binding Products.Count, StringFormat='Có {0} sản phẩm được tìm thấy'}" Style="{x:StaticResource LabelWellcomeStyle}" IsVisible="{Binding Products, Converter={x:StaticResource ConvertProductListToNotVisibleBooleean}}" FontSize="20" HorizontalTextAlignment="Start" Margin="0,30,0,10"></Label>
+                     
+
+                    <StackLayout VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding Products, Converter={x:StaticResource ConvertProductListToVisibleBooleean}}" Margin="0,60,0,10">
+                        <StackLayout.Resources>
+                            <Style TargetType="Label" x:Key="LabelUl">
+                                <Setter Property="TextColor" Value="Black"></Setter>
+                                <Setter Property="Margin" Value="10,0,0,0"></Setter> 
+                            </Style>
+                        </StackLayout.Resources>
+                        <Image Source="nothing.png"></Image>
+                        <Label Text="Để tìm được kết quả chính xác hơn, bạn vui lòng:" FontSize="16" Style="{x:StaticResource LabelWellcomeStyle}"></Label>
+                        <Label Style="{x:StaticResource LabelUl}" Text="-  Kiểm tra lỗi chính tả của từ khóa đã nhập"></Label>
+                        <Label Style="{x:StaticResource LabelUl}" Text="-  Thử lại bằng từ khóa khác"></Label>
+                        <Label Style="{x:StaticResource LabelUl}" Text="-  Thử lại bằng những từ khóa tổng quát hơn"></Label>
+                        <Label Style="{x:StaticResource LabelUl}" Text="-  Thử lại bằng những từ khóa ngắn gọn hơn"></Label>
+                    </StackLayout>
+                     
+                    <ScrollView VerticalScrollBarVisibility="Never" Padding="0,0,0,10">
+                        <StackLayout Orientation="Horizontal" >
+                            <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"> 
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <StackLayout Grid.Column="0"
+                                    BindableLayout.ItemsSource="{Binding Products, Converter={x:StaticResource ConvertProductListToProductListLeft}}">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate>
+                                            <Frame CornerRadius="5" BorderColor="LightGray" HasShadow="True" Margin="0,0,0,0"  Padding="1"  IsClippedToBounds="True">
+                                                <Frame.GestureRecognizers>
+                                                    <TapGestureRecognizer
+                                                        Command="{Binding BindingContext.OnProductClickedCommand, Source={x:Reference Name=MyProductsPage}}"
+                                                        CommandParameter="{Binding .}">
+
+                                                            </TapGestureRecognizer>
+                                                </Frame.GestureRecognizers>
+                                                <StackLayout Orientation="Vertical" Margin="0,0,0,0">
+                                                    <Frame Padding="0" HasShadow="False" CornerRadius="5" IsClippedToBounds="True">
+                                                        <Grid>
+                                                            <Image Source="{Binding Image1, Converter={x:StaticResource ConvertStringToImage}}" Aspect="AspectFill" WidthRequest="172"/>
+
+                                                    
+                                                            <Image Source="{Binding ID, Converter={x:StaticResource ConvertProductIDToRandomImage}}" VerticalOptions="Start" HorizontalOptions="End" WidthRequest="50">
+
+                                                            </Image>
+                                                        </Grid>
+                                                    </Frame>
+                                                    <BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" BackgroundColor="LightGray"/>
+                                                    <Label Text="{Binding DisplayName}" FontSize="14"  HeightRequest="35" Padding="10,-3,10,0">
+                                                        </Label>
+                                                </StackLayout>
+                                            </Frame> 
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate> 
+                                </StackLayout> 
+                             
+                                <StackLayout Grid.Column="1" BindableLayout.ItemsSource="{Binding Products, Converter={x:StaticResource ConvertProductListToProductListRight}}" >
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate>
+                                            <Frame CornerRadius="5" BorderColor="LightGray" HasShadow="True" Margin="0,0,0,0"  Padding="1"  IsClippedToBounds="True">
+                                                <Frame.GestureRecognizers>
+                                                    <TapGestureRecognizer
+                                                        Command="{Binding BindingContext.OnProductClickedCommand, Source={x:Reference Name=MyProductsPage}}"
+                                                        CommandParameter="{Binding .}">
+
+                                                            </TapGestureRecognizer>
+                                                </Frame.GestureRecognizers>
+                                                <StackLayout Orientation="Vertical" Margin="0,0,0,0">
+                                                    <Frame Padding="0" HasShadow="False" CornerRadius="5" IsClippedToBounds="True">
+                                                        <Grid VerticalOptions="FillAndExpand" >
+                                                            <Image Source="{Binding Image1, Converter={x:StaticResource ConvertStringToImage}}" Aspect="AspectFill" WidthRequest="172"/>
+                                                        
+                                                            <Image Source="{Binding ID, Converter={x:StaticResource ConvertProductIDToRandomImage}}" VerticalOptions="Start" HorizontalOptions="End" WidthRequest="50">
+
+                                                            </Image>
+                                                        </Grid>                                                    
+                                                    </Frame>
+                                                    <BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" BackgroundColor="LightGray"/>
+                                                    <Label Text="{Binding DisplayName}" FontSize="14"  HeightRequest="35" Padding="10,-3,10,0">
+
+                                                    </Label>
+                                                </StackLayout>
+                                            </Frame> 
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate> 
+                                </StackLayout>
+                            </Grid>
+                        </StackLayout>
+                    </ScrollView>
+
+                </StackLayout>
+
+
+                    <Frame AbsoluteLayout.LayoutBounds="0,0,1,45"
+                           AbsoluteLayout.LayoutFlags="WidthProportional,YProportional"
+                       HasShadow="True"
+                       Padding="10,0,10,0">
+                        <Grid>
+                                <Grid.ColumnDefinitions> 
+                                <ColumnDefinition Width="auto"></ColumnDefinition> 
+                                <ColumnDefinition></ColumnDefinition> 
+                                <ColumnDefinition Width="auto"></ColumnDefinition> 
+                            </Grid.ColumnDefinitions> 
+
+                    
+                            <ImageButton  
+                                   Grid.Column="0"
+                                BackgroundColor="Transparent"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Start"  
+                                         Command="{Binding OnComeBackCommand}">
+                                 <ImageButton.Source>
+                                    <FontImageSource Color="DarkOrange" Size="30"
+                                     
+                                                        FontFamily="UserIcon"
+                                                        Glyph="{x:Static Fonts:FontIcons.ArrowLeft}">
+                        
+                                    </FontImageSource>
+                                </ImageButton.Source> 
+                            </ImageButton>
+
+                            <Frame HasShadow="True"
+                           IsClippedToBounds="True"
+                           Margin="10,5,10,5"
+                           HeightRequest="30"
+                           CornerRadius="30"
+                           Padding="0"
+                       Grid.Column="1"
+                       >
+                        <Controls:CustomEntry
+                            Placeholder="Search"
+                            BorderColor="White"
+                            BackgroundColor="White"
+                            FontFamily="Arial"
+                            FontSize="13"
+                            TextColor="Black" 
+                            HeightRequest="30"
+                            Image="search" 
+                            ImageAlignment="Right"
+                            ImageWidth="13"
+                            ImageHeight="13"
+                            CornerRadius="30"
+                            IsCurvedCornersEnabled="True"
+                            Text="{Binding TextSearch}"
+                            > 
+                            <Entry.Behaviors> 
+                                <Behaviors:EventToCommandBehavior 
+                                    EventName="Completed" 
+                                    Command="{Binding OnCompletedSearchProductCommand}" />
+                            </Entry.Behaviors> 
+                        </Controls:CustomEntry>
+
+                        
+
+                    </Frame>
+
+                            <ImageButton  
+                                         BackgroundColor="Transparent"
+                                   Grid.Column="2"
+                               VerticalOptions="Center"
+                               HorizontalOptions="End"
+                               WidthRequest="30"
+                                        Clicked="Button_Clicked">
+                                <ImageButton.Source>
+                                    <FontImageSource Color="DarkOrange" Size="30"
+                                     
+                                                        FontFamily="UserIcon"
+                                                        Glyph="{x:Static Fonts:FontIcons.AirFilter}">
+                        
+                                    </FontImageSource>
+                                </ImageButton.Source> 
+                            </ImageButton>
+
+
+                        </Grid>
+
+                </Frame> 
+
+                <StackLayout x:Name="StackLayoutBetween"
+                             AbsoluteLayout.LayoutBounds="0,0,1,1"
+                             AbsoluteLayout.LayoutFlags="All"
+                             IsVisible="false"
+                             Background="#ffbe76"
+                             Opacity="0.3">
+                
+                </StackLayout> 
+
+                <Grid x:Name="GridFilter"
+                             AbsoluteLayout.LayoutBounds="0,0,1,1"
+                             AbsoluteLayout.LayoutFlags="All"
+                             Background="white"
+                             Padding="10,10,60,10"
+                             IsVisible="false" >
+                    <Grid.Resources>
+                        <Style TargetType="Button">
+                            <Setter Property="HeightRequest" Value="40"></Setter>
+                            <Setter Property="Padding" Value="5,0,5,0"></Setter>
+                            <Setter Property="FontSize" Value="13"></Setter>
+                            <Setter Property="Margin" Value="0"></Setter>
+                        </Style>
+                        <Style TargetType="Label" BasedOn="{x:StaticResource LabelTitleStyle}">
+                            <Setter Property="HeightRequest" Value="40"></Setter>
+                            <Setter Property="Padding" Value="5,0,5,0"></Setter>
+                            <Setter Property="FontSize" Value="17"></Setter>
+                            <Setter Property="FontAttributes" Value="Bold"></Setter>
+                            <Setter Property="TextColor" Value="Black"></Setter>
+                            <Setter Property="Margin" Value="0,20,0,-10"></Setter>
+                        </Style>
+                    </Grid.Resources>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid> 
+                           <Grid.ColumnDefinitions>
+                               <ColumnDefinition/>
+                               <ColumnDefinition/>
+                           </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Text="Bộ lọc tìm kiếm" Style="{x:StaticResource LabelTitleStyle}" FontAttributes="Bold"></Label>
+                            <ImageButton
+                                    Clicked="Button_Clicked_1"
+                                    HorizontalOptions="End"
+                                    BackgroundColor="Transparent"
+                                Grid.Column="1">
+                            <ImageButton.Source>
+                                <FontImageSource Color="{x:StaticResource TextColorH}" Size="30"
+                                     
+                                                    FontFamily="UserIcon"
+                                                    Glyph="{x:Static Fonts:FontIcons.ArrowCollapseRight}">
+                        
+                                </FontImageSource>
+                            </ImageButton.Source> 
+                        </ImageButton>
+                         
+                        <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Margin="0" HeightRequest="1" BorderColor="#dfe6e9" BorderWidth="1"></Button>
+                    </Grid>
+
+                    <ScrollView VerticalScrollBarVisibility="Never" Grid.Row="1" >
+                        <StackLayout>
+                            <Label Text="Khoảng giá" >
+
+                            </Label>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Entry Placeholder="min price"
+                                            Text="{Binding MinPrice, Converter={x:StaticResource ConvertDecimalToPriceString}}"
+                                            Keyboard="Numeric"></Entry>
+                                <Entry Placeholder="max price"
+                                            Grid.Column="1"
+                                            Text="{Binding MaxPrice, Converter={x:StaticResource ConvertDecimalToPriceString}}"
+                                            Keyboard="Numeric"></Entry>
+                            </Grid>
+
+                            <Label Text="Tính trạng sản phẩm" ></Label>
+                            <StackLayout Orientation="Horizontal"> 
+                                <Button Text="Sản phẩm New"
+                                        BorderColor="{Binding IsNew, Converter={x:StaticResource ConvertBooleanNewProductToColor}}"
+                                        BorderWidth="2"
+                                        Command="{Binding OnNewProductFilterCommand}"
+                                        CommandParameter="new"></Button> 
+                                <Button Text="Sản phẩm Like New"
+                                        BorderColor="{Binding IsNew, Converter={x:StaticResource ConvertBooleanLikeNewProductToColor}}"
+                                        BorderWidth="2"
+                                        Command="{Binding OnNewProductFilterCommand}"
+                                        CommandParameter="like new" > 
+                                    </Button>                           
+                            </StackLayout>
+                         
+                            <Label Text="Lựa chọn thanh toán" ></Label>
+                            <StackLayout> 
+                                <Button Text="Cho phép trả góp"
+                                        BorderColor="{Binding IsInstallment, Converter={x:StaticResource ConvertBooleanEvaluateToColor}}"
+                                        BorderWidth="2"
+                                    Command="{Binding OnInstallmentFilterCommand}"></Button>
+                            </StackLayout>
+
+                            <Label Text="Đánh giá" ></Label>
+                            <Grid> 
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/> 
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions> 
+                                <Button Text="Từ 5 sao"
+                                        Grid.Column="0"
+                                        Grid.Row="0" 
+                                        BorderColor="{Binding IsFiveStar, Converter={x:StaticResource ConvertBooleanEvaluateToColor}}"
+                                        BorderWidth="2"
+                                        Command="{Binding OnStarNunberFilterCommand}"
+                                        CommandParameter="5"></Button>
+                                <Button Text="Từ 4 sao"
+                                        Grid.Column="1"
+                                        Grid.Row="0" 
+                                        BorderColor="{Binding IsFourStar, Converter={x:StaticResource ConvertBooleanEvaluateToColor}}"
+                                        BorderWidth="2"
+                                        Command="{Binding OnStarNunberFilterCommand}"
+                                        CommandParameter="4"></Button>
+                                <Button Text="Từ 3 sao"
+                                        Grid.Column="0"
+                                        Grid.Row="1" 
+                                        BorderColor="{Binding IsThreeStar, Converter={x:StaticResource ConvertBooleanEvaluateToColor}}"
+                                        BorderWidth="2"
+                                        Command="{Binding OnStarNunberFilterCommand}"
+                                        CommandParameter="3"> 
+
+                                </Button> 
+                            </Grid>
+
+                            <Label Text="Khuyến mãi" ></Label>
+                            <Button Text="Đang giảm giá"
+                                        BorderColor="{Binding IsDiscount, Converter={x:StaticResource ConvertBooleanEvaluateToColor}}"
+                                        BorderWidth="2"
+                                        Command="{Binding OnDiscountFilterCommand}">
+
+                            </Button>
+
+                            <Label Text="DỊch vụ"></Label>
+                            <Button Text="Miễn phí ship"
+                                        BorderColor="{Binding IsFreeship, Converter={x:StaticResource ConvertBooleanEvaluateToColor}}"
+                                        BorderWidth="2"
+                                        Command="{Binding OnFreeshipFilterCommand}">
+
+                            </Button>
+                        </StackLayout>
+                    </ScrollView>
+                 
+                     
+                    <Grid Grid.Row="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Button Grid.Row="0" HeightRequest="1" BorderColor="#dfe6e9" BorderWidth="1"></Button>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="End" Grid.Row="1" >
+                            <StackLayout.Resources>
+                                <Style TargetType="Button"> 
+                                    <Style.Triggers>
+                                        <Trigger TargetType="Button"
+                                                Property="IsPressed" Value="True">
+                                            <Setter Property="BackgroundColor" Value="{x:StaticResource TextColorH}" /> 
+                                            <Setter Property="TextColor" Value="White" /> 
+                                        </Trigger> 
+                                    </Style.Triggers>
+                                </Style>
+                            </StackLayout.Resources>
+                            <Button Text="Thiết lập lại"
+                                    BorderColor="{x:StaticResource TextColorH}"
+                                    BorderWidth="1"
+                                    BackgroundColor="Transparent"
+                                    TextColor="{x:StaticResource TextColorH}"
+                                    Command="{Binding OnResetFilterCommand}"></Button>
+                            <Button Text="Áp dụng"
+                                    Command="{Binding OnFilterCommand}"
+                                    BackgroundColor="{x:StaticResource TextColorH}"
+                                    TextColor="White"
+                                    Clicked="Button_Clicked_1"></Button>
+                        </StackLayout> 
+                    </Grid>
+                </Grid>
+
+            </AbsoluteLayout> 
+    </ContentPage.Content>
+</ContentPage>

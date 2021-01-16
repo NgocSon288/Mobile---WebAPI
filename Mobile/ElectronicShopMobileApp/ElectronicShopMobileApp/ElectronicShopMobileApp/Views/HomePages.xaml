@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ElectronicShopMobileApp.Views.HomePages"
+             xmlns:Controls="clr-namespace:ElectronicShopMobileApp.Controls"
+             xmlns:Behaviors="clr-namespace:ElectronicShopMobileApp.Assets.Contains.Behavior"
+             xmlns:Fonts="clr-namespace:ElectronicShopMobileApp.Assets.Font"
+             x:Name="MyHomePage" >
+    <ContentPage.Content>
+        <ScrollView BackgroundColor="white"
+                    VerticalScrollBarVisibility="Never">
+            <StackLayout> 
+                <AbsoluteLayout> 
+                     
+                    <CarouselView x:Name="CarouselViewer"
+                                  ItemsSource="{Binding Advertisements}" 
+                                  HeightRequest="250"
+                                  Margin="0,0,0,0"
+                                  TranslationY="0">
+                        <CarouselView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal" />
+                        </CarouselView.ItemsLayout>
+                        <CarouselView.ItemTemplate >
+                            <DataTemplate>
+                                <StackLayout>
+                                    <Frame HasShadow="True" 
+                                           HorizontalOptions="FillAndExpand"
+                                           VerticalOptions="FillAndExpand"
+                                           Scale="1.2">
+                                        <StackLayout>
+                                             <Image Source="{Binding Image}">
+                                              
+                                             </Image>
+                                        </StackLayout>
+                                    </Frame>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CarouselView.ItemTemplate>
+                    </CarouselView>
+                     
+
+
+                    <Frame HasShadow="True"
+                           IsClippedToBounds="True" 
+                           Margin="20,5,20,0"
+                           HeightRequest="40"
+                           WidthRequest="300"
+                           CornerRadius="30"
+                           Padding="0"
+                           Opacity="0.9"
+                           x:Name="entrySearch" 
+                           >
+                        <Controls:CustomEntry 
+                            Placeholder="Search"
+                            BorderColor="White"
+                            BackgroundColor="White"
+                            FontFamily="Arial"
+                            FontSize="15"
+                            TextColor="Black" 
+                            HeightRequest="40"
+                            Image="search"
+                            ImageAlignment="Right"
+                            ImageWidth="15"
+                            ImageHeight="15"
+                            CornerRadius="30"
+                            IsCurvedCornersEnabled="True"
+                            Text="{Binding TextSearch}"
+                            > 
+                            <Entry.Behaviors> 
+                                <Behaviors:EventToCommandBehavior 
+                                    EventName="Completed" 
+                                    Command="{Binding OnCompletedSearchProductCommand}" />
+                            </Entry.Behaviors> 
+                        </Controls:CustomEntry>
+
+                        
+
+                    </Frame>
+
+                </AbsoluteLayout> 
+
+                <Label Style="{x:StaticResource LabelWellcomeStyle}" Margin="10,0,0,0">DANH MỤC SẢN PHẨM</Label>
+
+                <ScrollView
+                            Orientation="Horizontal"
+                            Margin="20,10,20,0"
+                            HorizontalScrollBarVisibility="Never">
+                    <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding Categories}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Frame CornerRadius="5" HasShadow="True" Margin="10,0,10,0"  Padding="0" WidthRequest="60" IsClippedToBounds="True">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                                        Command="{Binding BindingContext.OnCategoryClickedCommand, Source={x:Reference Name=MyHomePage}}"
+                                                        CommandParameter="{Binding .}">
+                                                
+                                                    </TapGestureRecognizer>
+                                    </Frame.GestureRecognizers>
+                                    <StackLayout Orientation="Vertical" Margin="0,0,0,0">
+                                        <Frame Padding="0" HasShadow="False" CornerRadius="5" IsClippedToBounds="True" BackgroundColor="{x:StaticResource TextColorH}">
+                                            <Image Source="{Binding Image, Converter={x:StaticResource ConvertStringToImage}}" HeightRequest="60"/>
+                                        </Frame> 
+                                    </StackLayout>
+                                </Frame> 
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                        
+                    </StackLayout>
+                </ScrollView>
+
+                
+                <StackLayout>
+                    <Label Style="{x:StaticResource LabelWellcomeStyle}" Text="SẢN PHẨM GIẢM GIÁ"></Label>
+                      
+                    <ScrollView 
+                            Margin="5,10,5,0" 
+                            VerticalScrollBarVisibility="Never">
+                    <StackLayout Orientation="Horizontal" >
+                        <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"> 
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Grid.Column="0"
+                                BindableLayout.ItemsSource="{Binding ProductsMostDiscount, Converter={x:StaticResource ConvertProductListToProductListLeft}}">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate>
+                                        <Frame CornerRadius="5" BorderColor="LightGray" HasShadow="True" Margin="0,0,0,0"  Padding="1"  IsClippedToBounds="True">
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer
+                                                    Command="{Binding BindingContext.OnProductClickedCommand, Source={x:Reference Name=MyHomePage}}"
+                                                    CommandParameter="{Binding .}">
+
+                                                        </TapGestureRecognizer>
+                                            </Frame.GestureRecognizers>
+                                            <StackLayout Orientation="Vertical" Margin="0,0,0,0">
+                                                <Frame Padding="0" HasShadow="False" CornerRadius="5" IsClippedToBounds="True">
+                                                    <Grid>
+                                                        <Image Source="{Binding Image1, Converter={x:StaticResource ConvertStringToImage}}" Aspect="AspectFill" WidthRequest="172"/>
+
+                                                    
+                                                        <Image Source="{Binding ID, Converter={x:StaticResource ConvertProductIDToRandomImage}}" VerticalOptions="Start" HorizontalOptions="End" WidthRequest="50">
+
+                                                        </Image>
+                                                    </Grid>
+                                                </Frame>
+                                                <BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" BackgroundColor="LightGray"/>
+                                                <Label Text="{Binding DisplayName}" FontSize="14"  HeightRequest="35" Padding="10,-3,10,0">
+                                                    </Label>
+                                            </StackLayout>
+                                        </Frame> 
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate> 
+                            </StackLayout> 
+                             
+                            <StackLayout Grid.Column="1" BindableLayout.ItemsSource="{Binding ProductsMostDiscount, Converter={x:StaticResource ConvertProductListToProductListRight}}" >
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate>
+                                        <Frame CornerRadius="5" BorderColor="LightGray" HasShadow="True" Margin="0,0,0,0"  Padding="1"  IsClippedToBounds="True">
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer
+                                                    Command="{Binding BindingContext.OnProductClickedCommand, Source={x:Reference Name=MyHomePage}}"
+                                                    CommandParameter="{Binding .}">
+
+                                                        </TapGestureRecognizer>
+                                            </Frame.GestureRecognizers>
+                                            <StackLayout Orientation="Vertical" Margin="0,0,0,0">
+                                                <Frame Padding="0" HasShadow="False" CornerRadius="5" IsClippedToBounds="True">
+                                                    <Grid VerticalOptions="FillAndExpand" >
+                                                        <Image Source="{Binding Image1, Converter={x:StaticResource ConvertStringToImage}}" Aspect="AspectFill" WidthRequest="172"/>
+                                                        
+                                                        <Image Source="{Binding ID, Converter={x:StaticResource ConvertProductIDToRandomImage}}" VerticalOptions="Start" HorizontalOptions="End" WidthRequest="50">
+
+                                                        </Image>
+                                                    </Grid>                                                    
+                                                </Frame>
+                                                <BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" BackgroundColor="LightGray"/>
+                                                <Label Text="{Binding DisplayName}" FontSize="14"  HeightRequest="35" Padding="10,-3,10,0">
+
+                                                </Label>
+                                            </StackLayout>
+                                        </Frame> 
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate> 
+                            </StackLayout>
+                        </Grid>
+                    </StackLayout>
+                </ScrollView>
+
+
+                </StackLayout>
+
+                <StackLayout>
+                    <Label Style="{x:StaticResource LabelWellcomeStyle}">TÌM KIẾM PHỔ BIẾN</Label> 
+                      
+                    <ScrollView
+                            Orientation="Horizontal"
+                            Margin="20,10,20,0"
+                            HorizontalScrollBarVisibility="Never">
+                    <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding ProductsMostSearched}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Frame CornerRadius="5" BorderColor="Gray" HasShadow="True" Margin="10,0,10,0"  Padding="0" IsClippedToBounds="True">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                        Command="{Binding BindingContext.OnProductClickedCommand, Source={x:Reference Name=MyHomePage}}"
+                                        CommandParameter="{Binding .}">
+
+                                            </TapGestureRecognizer>
+                                    </Frame.GestureRecognizers>
+                                    <StackLayout Orientation="Vertical" Margin="0,0,0,0" WidthRequest="300">
+                                        <Frame Padding="1,1,1,1" HasShadow="False" CornerRadius="5" IsClippedToBounds="True" BackgroundColor="Gray">
+                                            <Grid>
+                                                <Image Source="{Binding Image1, Converter={x:StaticResource ConvertStringToImage}}" Aspect="AspectFill"/>
+                                            
+                                                <Image Source="{Binding ID, Converter={x:StaticResource ConvertProductIDToRandomImage}}" VerticalOptions="Start" HorizontalOptions="End" WidthRequest="80" TranslationY="-15"/>
+                                            </Grid>
+                                        </Frame>
+                                        <Label Text="{Binding DisplayName}" Style="{StaticResource LabelTitleStyle}" Margin="10,0,0,0" FontSize="20" HeightRequest="50"/>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <StackLayout Grid.Column="0" Orientation="Horizontal" Padding="10,0,0,0">
+                                                <Image WidthRequest="20" HeightRequest="20">
+                                                    <Image.Source>
+                                                        <FontImageSource Color="Red" Size="30" FontFamily="UserIcon" 
+                                                                            Glyph="{x:Static Fonts:FontIcons.CurrencyEur}">
+                        
+                                                        </FontImageSource>
+                                                    </Image.Source>  
+                                                </Image>
+                                                <Label Text="{Binding ProductOptions[0].Price, Converter={x:StaticResource ConvertDecimalToPriceString}}" Style="{StaticResource LabelTitleStyle}"/>
+                                            </StackLayout>
+                                            <StackLayout Grid.Column="1" Orientation="Horizontal">
+                                                <Image WidthRequest="20" HeightRequest="20">
+                                                    <Image.Source>
+                                                        <FontImageSource Color="Black" Size="30" FontFamily="UserIcon" 
+                                                                            Glyph="{x:Static Fonts:FontIcons.CurrencyEurOff}">
+                        
+                                                        </FontImageSource>
+                                                    </Image.Source>  
+                                                </Image>
+                                                <Label Text="{Binding ProductOptions[0].DelPrice, Converter={x:StaticResource ConvertDecimalToPriceString}}" Style="{StaticResource LabelTitleStyle}" TextColor="Black" TextDecorations="Strikethrough"/>
+                                            </StackLayout>
+                                        </Grid> 
+                                        <BoxView HorizontalOptions="FillAndExpand" HeightRequest="2" BackgroundColor="gray"/>
+                                        <StackLayout Orientation="Horizontal">
+                                             <Label Text="{Binding Description, Converter={x:StaticResource ConvertDescriptionToShortDescription}}" Style="{StaticResource LabelTitleStyle}" Padding="10,0,0,0" FontSize="16" HeightRequest="60" TextColor="Black"></Label>
+                                             
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Frame> 
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                        
+                    </StackLayout>
+                </ScrollView>
+
+                </StackLayout>
+
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

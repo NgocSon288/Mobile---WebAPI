@@ -1,0 +1,602 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ElectronicShopMobileApp.Views.ProductDetailPage"
+             x:Name="MyProductDetailPage"
+             xmlns:Controls="clr-namespace:ElectronicShopMobileApp.Controls"
+             xmlns:Fonts="clr-namespace:ElectronicShopMobileApp.Assets.Font"
+             NavigationPage.HasNavigationBar="False"
+             Title="{Binding Product.DisplayName}"
+             >
+             
+    <ContentPage.Content>
+        <AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"> 
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1"
+                             AbsoluteLayout.LayoutFlags="All"
+                             x:Name="StackLayoutProductDetail"
+                            VerticalScrollBarVisibility="Never"
+                            Padding="0,0,0,0"> 
+                        <StackLayout>
+                        <StackLayout Orientation="Horizontal"
+                                     HorizontalOptions="Center">
+
+                                
+                            <CarouselView x:Name="CarouselViewer"
+                                            ItemsSource="{Binding ImagesList}" 
+                                            HeightRequest="250"
+                                            Margin="0,0,0,0"
+                                            TranslationY="0">
+                                <CarouselView.ItemsLayout>
+                                    <LinearItemsLayout Orientation="Horizontal" />
+                                </CarouselView.ItemsLayout>
+                                <CarouselView.ItemTemplate >
+                                    <DataTemplate>
+                                        <StackLayout>
+                                            <Frame HasShadow="True" 
+                                                    HorizontalOptions="FillAndExpand"
+                                                    VerticalOptions="FillAndExpand"
+                                                    Scale="1.2">
+                                                <StackLayout>
+                                                        <Image Source="{Binding .}" Aspect="AspectFill">
+                                              
+                                                        </Image>
+                                                </StackLayout>
+                                            </Frame>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </CarouselView.ItemTemplate>
+                            </CarouselView>
+
+                        </StackLayout>
+                     
+                        <StackLayout Orientation="Horizontal" Padding="10,0,10,0">
+                                
+                            <Label Text="{Binding Product.DisplayName}" FontSize="20" FontAttributes="Bold"></Label>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Padding="10,0,10,0">
+                            <Label Text="{Binding Product.ProductOptions[0].Price, Converter={x:StaticResource ConvertDecimalToPriceString}, StringFormat='{0}đ'}" TextColor="Red" FontSize="20"></Label>
+                            <Label Text="{Binding Product.ProductOptions[0].DelPrice, Converter={x:StaticResource ConvertDecimalToPriceString}, StringFormat='{0}đ'}" TextColor="Black" TextDecorations="Strikethrough" FontSize="18" Margin="20,0,0,0"></Label>
+                        <BoxView BackgroundColor="#e8efee" HeightRequest="5" Opacity="0.3"/>
+                        </StackLayout>
+                        <Label Text="{Binding Product.IsFreeShip, Converter={x:StaticResource ConverterBooleanIsFreeShipToText}}" Padding="10,0,10,0"></Label>
+                        <Grid  Padding="10,0,10,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label Text="{Binding Product.ViewNumber, StringFormat='Số lượt xem: {0}'}" TextColor="Black"></Label>
+                            <ImageButton Grid.Column="1"
+                                            HorizontalOptions="End"
+                                BackgroundColor="Transparent"
+                                Command="{Binding BindingContext.OnFavoriteProductToggleClickCommand, Source={x:Reference Name=MyProductDetailPage}}">
+                                    <ImageButton.Source>
+                                        <FontImageSource Color="Red" Size="30"
+                                     
+                                                            FontFamily="UserIcon"
+                                                            Glyph="{Binding  IsFavoriteProduct, Converter={x:StaticResource ConvertBooleanFavoriteProductToImage}}">
+
+                                    </FontImageSource>
+                                </ImageButton.Source>
+                            </ImageButton>
+                        </Grid>
+                        <Button BorderColor="Gray" BorderWidth="1" Grid.Row="1" HeightRequest="1" ScaleX="1.5"></Button>
+
+                        <Label Text="CẤU HÌNH SẢN PHẨM" Style="{x:StaticResource LabelWellcomeStyle}" Padding="10,0,10,0" Margin="0,10,0,0"></Label>
+                              
+                        <StackLayout  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="10,0,10,0" Margin="0,0,0,30" IsEnabled="True" BindableLayout.ItemsSource="{Binding Product.ProductDetails}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate> 
+                                        <StackLayout Margin="0,0,0,0">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition />
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="4*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Label Text="{Binding ElementLabel}" TextColor="Black" FontAttributes="Bold" Grid.Column="0" Grid.Row="0" HorizontalTextAlignment="Start"></Label>
+                                                <Label Text="{Binding ElementDescription}" Margin="10,10,0,0" TextColor="Blue" Grid.Column="1" Grid.Row="0" HorizontalTextAlignment="Start"></Label>
+                                            </Grid>
+                                        </StackLayout>  
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        
+                        </StackLayout>
+
+                        <Button BorderColor="Gray" BorderWidth="1" Grid.Row="1" HeightRequest="1" ScaleX="1.5"></Button>
+
+                        <Label Text="MÔ TẢ" Style="{x:StaticResource LabelWellcomeStyle}" Padding="10,0,10,0" Margin="0,10,0,0"></Label>
+                        <Label Text="{Binding Product.Description}" TextColor="Black" FontSize="15" Padding="10,0,10,0" Margin="0,0,0,10"></Label>
+
+                        <Button BorderColor="Gray" BorderWidth="1" Grid.Row="1" HeightRequest="1" ScaleX="1.5"></Button>    
+                     
+                        <Label Text="ĐÁNH GIÁ SẢN PHẨM" Style="{x:StaticResource LabelWellcomeStyle}" Padding="10,0,10,0"  Margin="0,10,0,0"></Label>
+                             
+
+                        <Label Text="Chưa có đánh giá nào cho sản phẩm này" Padding="10,0,10,0" IsVisible="{ Binding Comments, Converter={x:StaticResource ConvertCommentsListToVisibleLabel}}" HorizontalTextAlignment="Center" Margin="0,0,0,0" TextColor="Blue" FontSize="14"></Label>
+                        <Image Source="smile.png"   Margin="10,0,10,0" IsVisible="{ Binding Comments, Converter={x:StaticResource ConvertCommentsListToVisibleLabel}}" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="100"></Image>
+
+                            <StackLayout IsVisible="{ Binding Comments, Converter={x:StaticResource ConvertCommentsListToVisible}}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0,0,0,30" IsEnabled="True" BindableLayout.ItemsSource="{Binding Comments}" Padding="10,0,10,0">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate> 
+                                            <StackLayout Background="white">
+                                                <Grid Margin="0,10,0,20">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="30"></RowDefinition>
+                                                        <RowDefinition Height="30"></RowDefinition>
+                                                        <RowDefinition></RowDefinition>
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="30"></ColumnDefinition>
+                                                        <ColumnDefinition/>
+                                                        <ColumnDefinition Width="30"></ColumnDefinition>
+                                                        <ColumnDefinition Width="30"></ColumnDefinition>
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <Frame Padding="0" Grid.Column="0" Grid.Row="0" CornerRadius="30" >
+                                                        <Image Source="{Binding AvatarCustomer}" Aspect="AspectFill"></Image>
+                                                    </Frame>
+                                                    <Label Text="{Binding CustomerName}" TextColor="Black" Grid.Column="1" Grid.Row="0"></Label>
+                                                    <StackLayout BindableLayout.ItemsSource="{Binding StarNumber, Converter={x:StaticResource ConvertStarNumberToStarList}}"
+                                                                Orientation="Horizontal" Grid.Column="1" Grid.Row="1">
+                                                        <BindableLayout.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <StackLayout>
+                                                                    <Image>
+                                                                        <Image.Source>
+                                                                            <FontImageSource Color="{x:StaticResource TextColorH}" Size="20"
+                                     
+                                                                                        FontFamily="UserIcon"
+                                                                                        Glyph="{Binding ., Converter={x:StaticResource ConvertBitStarNumberToStarIcon}}">
+
+                                                                            </FontImageSource>
+                                                                        </Image.Source>
+                                                                    </Image>
+                                                                </StackLayout>
+                                                            </DataTemplate>
+                                                        </BindableLayout.ItemTemplate>
+                                                    </StackLayout>
+                                                    <StackLayout Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" >
+                                                        <ImageButton BackgroundColor="Transparent" 
+                                                                Command="{Binding BindingContext.OnEvaluateCommentLikeToggleClickCommand, Source={x:Reference Name=MyProductDetailPage}}"
+                                                                CommandParameter="{Binding .}">
+                                                            <ImageButton.Source>
+                                                                <FontImageSource Color="{Binding IsLike, Converter={x:StaticResource ConvertBooleanCommentLikeStateToColor}}" Size="30"
+                                     
+                                                                            FontFamily="UserIcon"
+                                                                            Glyph="{x:Static Fonts:FontIcons.EmoticonOutline}">
+
+                                                                </FontImageSource>
+                                                            </ImageButton.Source>
+                                                        </ImageButton>
+                                                        <Label Text="{Binding LikeNumber}" WidthRequest="30" HorizontalTextAlignment="Center"
+                                                        TextColor="{Binding IsLike, Converter={x:StaticResource ConvertBooleanCommentLikeStateToColor}}"></Label>
+                                                    </StackLayout>
+
+                                                    <StackLayout Grid.Column="3" Grid.Row="0" Grid.RowSpan="2">
+                                                        <ImageButton BackgroundColor="Transparent"
+                                                                Command="{Binding BindingContext.OnEvaluateCommentDisLikeToggleClickCommand, Source={x:Reference Name=MyProductDetailPage}}"
+                                                                CommandParameter="{Binding .}">
+                                                            <ImageButton.Source>
+                                                                <FontImageSource Color="{Binding IsLike, Converter={x:StaticResource ConvertBooleanCommentDisLikeStateToColor}}" Size="30"
+                                     
+                                                                            FontFamily="UserIcon"
+                                                                            Glyph="{x:Static Fonts:FontIcons.EmoticonAngryOutline}">
+
+                                                                </FontImageSource>
+                                                            </ImageButton.Source>
+                                                        </ImageButton>
+                                                        <Label Text="{Binding DisLikeNumber}" WidthRequest="30" HorizontalTextAlignment="Center"
+                                                        TextColor="{Binding IsLike, Converter={x:StaticResource ConvertBooleanCommentDisLikeStateToColor}}">
+                                                        </Label>
+                                                    </StackLayout>
+                                                    <StackLayout Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2">
+                                                        <Label Text="{Binding Reason}" TextColor="Orange"></Label>
+                                                        <Label Text="{Binding Description}" TextColor="Black"></Label>
+                                                    </StackLayout>
+                                                </Grid>
+                                            </StackLayout>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                        
+                        </StackLayout>
+
+                        
+
+                        <!--<Grid ColumnSpacing="0"
+                                            TranslationY="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                         
+                            <AbsoluteLayout Grid.Column="0"  
+                                            HeightRequest="30" 
+                                        BackgroundColor="#4834d4">
+                                <Image BackgroundColor="Transparent"
+                                       AbsoluteLayout.LayoutBounds="0,0,1,0.8"
+                                       Margin="0,0,0,0" 
+                                       AbsoluteLayout.LayoutFlags="All"
+                                       Grid.Column="1" 
+                                       Scale="0.65"
+                                       TranslationY="-5">
+                                    <Image.Source>
+                                        <FontImageSource Color="White" Size="10" 
+                                                FontFamily="UserIcon"
+                                                Glyph="{x:Static Fonts:FontIcons.CartOutline}">
+                        
+                                        </FontImageSource>
+                                    </Image.Source>
+                                </Image> 
+                                <Button Text="Thêm vào giỏ"
+                                        TextColor="White"
+                                        TranslationY="-9"
+                                        Padding="0,30,0,0"
+                                        FontSize="10"
+                                        BackgroundColor="Transparent"
+                                        AbsoluteLayout.LayoutBounds="0,1,1,1"
+                                        AbsoluteLayout.LayoutFlags="All"
+                                      
+                                    Clicked="Button_Clicked" >
+
+                                </Button> 
+                            
+                            </AbsoluteLayout> 
+
+                         
+
+                            <Grid
+                                    Grid.Column="1"
+                                Padding="0,0,0,0"
+                                Margin="0,0,0,0"
+                                BackgroundColor="Orange">
+
+                                <Frame Padding="0" HeightRequest="50" Margin="0,0,0,0">
+                                    <Grid>
+                                        <Image Source="radient.jpg" Aspect="Fill"></Image>
+                                        <Button Text="Mua ngay" FontSize="16" TranslationY="-5" Clicked="Button_Clicked"  BackgroundColor="Transparent" TextColor="White">
+                                                <Button.Style>
+                                                <Style TargetType="Button"> 
+                                                    <Style.Triggers>
+                                                        <Trigger TargetType="Button"
+                                                                Property="IsPressed" Value="True"> 
+                                                            <Setter Property="TextColor" Value="Black" />  
+                                                        </Trigger>  
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style> 
+                                        </Button>
+
+                                    </Grid>
+                                </Frame> 
+                            </Grid>
+                        </Grid>-->  
+                    </StackLayout>
+                        
+                </ScrollView>
+                <Grid ColumnSpacing="0"
+                                            TranslationY="10" Grid.Row="1" Padding="0,0,0,0" Margin="0,0,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                         
+                            <AbsoluteLayout Grid.Column="0"  
+                                            HeightRequest="30" 
+                                        BackgroundColor="#4834d4">
+                                <Image BackgroundColor="Transparent"
+                                       AbsoluteLayout.LayoutBounds="0,0,1,0.8"
+                                       Margin="0,0,0,0" 
+                                       AbsoluteLayout.LayoutFlags="All"
+                                       Grid.Column="1" 
+                                       Scale="0.65"
+                                       TranslationY="-5">
+                                    <Image.Source>
+                                        <FontImageSource Color="White" Size="10" 
+                                                FontFamily="UserIcon"
+                                                Glyph="{x:Static Fonts:FontIcons.CartOutline}">
+                        
+                                        </FontImageSource>
+                                    </Image.Source>
+                                </Image> 
+                                <Button Text="Thêm vào giỏ"
+                                        TextColor="White"
+                                        TranslationY="-9"
+                                        Padding="0,30,0,0"
+                                        FontSize="10"
+                                        BackgroundColor="Transparent"
+                                        AbsoluteLayout.LayoutBounds="0,1,1,1"
+                                        AbsoluteLayout.LayoutFlags="All"
+                                      
+                                    Clicked="Button_Clicked" >
+
+                                </Button> 
+                            
+                            </AbsoluteLayout> 
+
+                         
+
+                            <Grid
+                                    Grid.Column="1"
+                                Padding="0,0,0,0"
+                                Margin="0,0,0,0"
+                                BackgroundColor="Orange">
+
+                                <Frame Padding="0" HeightRequest="50" Margin="0,0,0,0">
+                                    <Grid>
+                                        <Image Source="radient.jpg" Aspect="Fill"></Image>
+                                        <Button Text="Mua ngay" FontSize="16" TranslationY="-5" Clicked="Button_Clicked"  BackgroundColor="Transparent" TextColor="White">
+                                                <Button.Style>
+                                                <Style TargetType="Button"> 
+                                                    <Style.Triggers>
+                                                        <Trigger TargetType="Button"
+                                                                Property="IsPressed" Value="True"> 
+                                                            <Setter Property="TextColor" Value="Black" />  
+                                                        </Trigger>  
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style> 
+                                        </Button>
+
+                                    </Grid>
+                                </Frame> 
+                            </Grid>
+                        </Grid>   
+            </Grid>
+
+            <Frame AbsoluteLayout.LayoutBounds="0,0,1,45"
+                       AbsoluteLayout.LayoutFlags="WidthProportional,YProportional"
+                   HasShadow="True"
+                   Padding="10,5,10,5">
+                    <Grid>
+                            <Grid.ColumnDefinitions> 
+                            <ColumnDefinition Width="auto"></ColumnDefinition> 
+                            <ColumnDefinition></ColumnDefinition> 
+                            <ColumnDefinition Width="auto"></ColumnDefinition> 
+                        </Grid.ColumnDefinitions>
+
+                    
+                        <ImageButton  
+                               Grid.Column="0"
+                            BackgroundColor="Transparent"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Start"  
+                                     Command="{Binding OnComeBackCommand}">
+                             <ImageButton.Source>
+                                <FontImageSource Color="{x:StaticResource TextColorH}" Size="30"
+                                     
+                                                    FontFamily="UserIcon"
+                                                    Glyph="{x:Static Fonts:FontIcons.ArrowLeft}">
+                        
+                                </FontImageSource>
+                            </ImageButton.Source> 
+                        </ImageButton>
+
+                        <Label Text="{Binding Product.DisplayName, Converter={x:StaticResource ConvertDisplayNameToSubDisplayname}}" Grid.Column="1" FontSize="16" TextColor="Black" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"></Label>
+
+                        <ImageButton  
+                                     BackgroundColor="Transparent"
+                               Grid.Column="2"
+                           VerticalOptions="Center"
+                           HorizontalOptions="End"
+                           WidthRequest="30"
+                                     Command="{Binding OnGoToCartClickCommand}">
+                            <ImageButton.Source>
+                                <FontImageSource Color="DarkOrange" Size="30"
+                                     
+                                                    FontFamily="UserIcon"
+                                                    Glyph="{x:Static Fonts:FontIcons.CartOutline}">
+                        
+                                </FontImageSource>
+                            </ImageButton.Source> 
+                        </ImageButton>  
+                    </Grid>
+
+            </Frame> 
+                        
+
+             <StackLayout x:Name="StackLayoutBetween"
+                         AbsoluteLayout.LayoutBounds="0,0,1,1"
+                         AbsoluteLayout.LayoutFlags="All"
+                         IsVisible="false"
+                         Background="#ffbe76"
+                         Opacity="0.3">
+                
+            </StackLayout>
+
+            <Grid x:Name="GridFilter"
+
+                         AbsoluteLayout.LayoutBounds="0,1,1,0.6"
+                         AbsoluteLayout.LayoutFlags="All"
+                         Background="white"
+                         IsVisible="false"
+                            Margin="0,0,0,0"
+                  Padding="0,0,0,0">
+                <Grid.Resources>
+                    <Style TargetType="Button"> 
+                        <Style.Triggers>
+                            <Trigger TargetType="Button"
+                                    Property="IsPressed" Value="True">
+                                <Setter Property="BackgroundColor" Value="{x:StaticResource TextColorH}" /> 
+                                <Setter Property="TextColor" Value="White" /> 
+                            </Trigger> 
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Resources>
+                <Grid.RowDefinitions> 
+                    <RowDefinition Height="auto"></RowDefinition> 
+                    <RowDefinition Height="auto"></RowDefinition> 
+                    <RowDefinition Height="*"></RowDefinition> 
+                    <RowDefinition Height="auto"></RowDefinition> 
+                    <RowDefinition Height="auto"></RowDefinition> 
+                    <RowDefinition Height="auto"></RowDefinition> 
+                    <RowDefinition Height="auto"></RowDefinition> 
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                        <Grid Padding="10,10,10,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid HeightRequest="70">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <Image Source="{Binding ImageOption}" WidthRequest="70" HeightRequest="70" Grid.RowSpan="2" Aspect="Fill"></Image>
+
+                                <Label Text="{Binding Product.DisplayName}" Grid.Column="1" FontSize="20" TextColor="Black" FontAttributes="Bold"></Label>
+                                <StackLayout Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+                                    <Label
+                                    Text="{Binding ProductOptionSelected.Price, Converter={x:StaticResource ConvertDecimalToPriceString}, StringFormat='{0}đ'}" 
+                                   TextColor="red"></Label>
+                                    <Label Text="{Binding ProductOptionSelected.DelPrice, Converter={x:StaticResource ConvertDecimalToPriceString}, StringFormat='{0}đ'}" 
+                                        Padding="10,0,0,0"
+                                       TextDecorations="Strikethrough"  ></Label>
+                                </StackLayout>
+                            </Grid>
+                            <Button  Text="X" Clicked="Button_Clicked_1"
+                                VerticalOptions="Start" 
+                             TextColor="Red"
+                             HorizontalOptions="End"
+                                     FontSize="20"
+                                     WidthRequest="50" BackgroundColor="White"
+                                 Grid.Column="1"></Button>
+                        </Grid>
+                    </Grid>
+                  
+                <Button BorderColor="Gray" BorderWidth="1" Grid.Row="1" HeightRequest="1"></Button>
+                
+
+                <StackLayout Grid.Row="2">
+                    <Label Text="Chọn option" FontSize="15" Margin="10,0,0,0" TextColor="Black" VerticalTextAlignment="Center" FontAttributes="Bold" HorizontalTextAlignment="Start"></Label>
+                    <ScrollView> 
+                            <FlexLayout 
+                            BindableLayout.ItemsSource="{Binding Product.ProductOptions}"
+                            Wrap="Wrap"
+                            Direction="Row"
+                            JustifyContent="Center"
+                            AlignItems="Center"
+                            AlignContent="Start">
+                                <BindableLayout.ItemTemplate >
+                                    <DataTemplate>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Button Text="{Binding OptionContent}"
+                                                        VerticalOptions="Center"
+                                                        HorizontalOptions="Center"
+                                                         Padding="5,0,5,0"
+                                                         Margin="0,10,20,0"
+                                                         FontSize="14"
+                                                        HeightRequest="24"
+                                                    BackgroundColor="LightGray"
+                                                        Command="{Binding BindingContext.OnProductOptionSelectedClickedCommand, Source={x:Reference Name=MyProductDetailPage}}"
+                                                        CommandParameter="{Binding .}" >
+                                            </Button>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </FlexLayout>
+                        </ScrollView>
+                </StackLayout>
+                  
+                <Button BorderColor="Gray" BorderWidth="1" Grid.Row="3" HeightRequest="1"></Button>
+
+                <Grid Grid.Row="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label Text="Số Lượng"  FontSize="15" Margin="10,0,0,0"  TextColor="Black" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" Grid.Column="0"></Label>
+                        <Grid Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30"></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition Width="30"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <ImageButton Source="decrease.png"
+                                Command="{Binding BindingContext.OnDecreaseCountChangedClickedCommand, Source={x:Reference Name=MyProductDetailPage}}" 
+                                Grid.Column="0"
+                                         Aspect="Fill"
+                                    BackgroundColor="White"
+                                    WidthRequest="30"
+                                    HeightRequest="30"
+                                    VerticalOptions="Center"> 
+                            </ImageButton> 
+                            <Grid Grid.Column="1">
+                                <Image Source="midle.png" WidthRequest="60" VerticalOptions="Center" HorizontalOptions="Center">
+
+                                </Image>
+                                <Label Text="{Binding Count}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" TextColor="Black"
+                                        VerticalOptions="Center" HorizontalOptions="Center" FontSize="20">
+                                </Label>
+                            </Grid> 
+                            <ImageButton Source="encrease.png"
+                                Command="{Binding BindingContext.OnIncreaseCountChangedClickedCommand, Source={x:Reference Name=MyProductDetailPage}}" 
+                                Grid.Column="2" 
+                                         Aspect="Fill"
+                                    BackgroundColor="White"
+                                    WidthRequest="30"
+                                    HeightRequest="30"
+                                    VerticalOptions="Center">
+
+                            </ImageButton>
+                        </Grid>
+                    </Grid>
+                   
+
+                <Grid Grid.Row="6" > 
+                   <Grid>
+                       
+                       <Button Text="Thêm vào giỏ" 
+                           Background="#686de0"
+                               TextColor="White"
+                           Command="{Binding BindingContext.OnAddToCartClickCommand, Source={x:Reference Name=MyProductDetailPage}}"
+                            
+                            Margin="0,0,0,0"
+                            FontSize="20"
+                           x:Name="ButtonAddToCart"
+                           Clicked="Button_Clicked_1"></Button>
+                       <Image BackgroundColor="Transparent"
+                                HorizontalOptions="End">
+                            <Image.Source>
+                                <FontImageSource Color="Yellow" Size="30" 
+                                        FontFamily="UserIcon"
+                                        Glyph="{x:Static Fonts:FontIcons.CartOutline}">
+                        
+                                </FontImageSource>
+                            </Image.Source>
+                        </Image> 
+                   </Grid>
+
+
+                    <Button Text="Mua ngay" 
+                            Background="#c4146a" 
+                            Command="{Binding BindingContext.OnBuyNowClickCommand, Source={x:Reference Name=MyProductDetailPage}}"
+                            Padding="0,0,0,0"
+                            Margin="0,0,0,0"
+                            FontSize="20"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            x:Name="ButtonBuyNow"
+                            Clicked="Button_Clicked_1"></Button>
+                </Grid>
+                  
+            </Grid>
+
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage> 

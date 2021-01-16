@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ElectronicShopMobileApp.Views.LoginPage"
+             xmlns:Controls="clr-namespace:ElectronicShopMobileApp.Controls"
+             xmlns:Font="clr-namespace:ElectronicShopMobileApp.Assets.Font"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content> 
+         <AbsoluteLayout>
+            <StackLayout BackgroundColor="#e6e6e6" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                <Grid>
+                    <StackLayout Padding="0" Margin="0" HorizontalOptions="FillAndExpand">
+                        <Frame HeightRequest="200" BackgroundColor="HotPink" Padding="0" Margin="0">
+                            <Grid>
+                                <Image Source="backgroundLogin.jpg" Aspect="AspectFill" Margin="0"/>
+                                <Label Text="ELECTRONIC SHOP" Style="{x:StaticResource LabelWellcomeStyle}" Margin="0,-15,0,0" HorizontalOptions="CenterAndExpand" FontSize="30" TextColor="#F79F1F" VerticalOptions="Center" FontAttributes="Bold"/>
+                            </Grid>
+                        </Frame>
+                    </StackLayout>
+                    <StackLayout Padding="0" Margin="10,130,10,0" HorizontalOptions="FillAndExpand" TranslationY="20" Opacity="0.95">
+                        <Frame  BackgroundColor="White" HeightRequest="500" HasShadow="True" Padding="0" Margin="0">
+
+                            <StackLayout>
+                                 
+
+                                <StackLayout Padding="0" Margin="15,10">
+
+                                    <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Frame BackgroundColor="SkyBlue" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                                <Image Source="avatar.png" Aspect="AspectFill" Margin="0"/>
+                                            </Frame>
+
+                                            <Controls:CustomEntry Placeholder="Tài khoản" TextColor="{x:StaticResource TextColorH}" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0" Text="{Binding UserName}"/>
+                                        </StackLayout>
+                                    </Frame>
+
+                                    <Frame BackgroundColor="Transparent" BorderColor="DarkGray" Margin="0,15,0,0" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Frame BackgroundColor="SkyBlue" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                                                <Image Source="password.jpg" Aspect="AspectFill" Margin="0"/>
+                                            </Frame>
+
+                                            <Controls:CustomEntry Placeholder="Mật khẩu" IsPassword="True" TextColor="{x:StaticResource TextColorH}" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0" Text="{Binding PassWord}"/>
+                                        </StackLayout>
+                                    </Frame>
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackLayout  Orientation="Horizontal">
+                                            
+                                            <ImageButton   BackgroundColor="Transparent" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="End" WidthRequest="30" Command="{Binding OnRememberPasswordClickCommand}">
+                                                <ImageButton.Source>
+                                                    <FontImageSource Color="{x:StaticResource TextColorH}" Size="25"
+                                     
+                                                                        FontFamily="UserIcon"
+                                                                        Glyph="{Binding IsRememberPassword, Converter={x:StaticResource ConvertBooleanToCheckIcon}}">
+                        
+                                                    </FontImageSource>
+                                                </ImageButton.Source> 
+                                            </ImageButton>   
+
+                                            <Label Text="Nhớ mật khẩu" TextColor="DarkGray" FontSize="Small" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                                    
+                                        </StackLayout> 
+                                        <Button Text="Quên mật khẩu" BackgroundColor="Transparent" Grid.Column="1" TextColor="{x:StaticResource TextColorH}" HorizontalOptions="End" Command="{Binding OnForgetPasswordClickCommand}"/>
+                                    </Grid>
+
+                                     
+
+                                    <Frame Padding="0" HeightRequest="50" Margin="0,0,0,0" CornerRadius="20">
+                                       <Grid>
+                                           <Image Source="radient.jpg" Aspect="Fill"></Image>
+                                           <Button Text="ĐĂNG NHẬP" Command="{Binding LoginCommand}"  BackgroundColor="Transparent" FontSize="20" TextColor="White">
+                                                 <Button.Style>
+                                                    <Style TargetType="Button"> 
+                                                        <Style.Triggers>
+                                                            <Trigger TargetType="Button"
+                                                                    Property="IsPressed" Value="True"> 
+                                                                <Setter Property="TextColor" Value="Black" />  
+                                                            </Trigger>  
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Button.Style> 
+                                            </Button>
+
+                                       </Grid>
+                                   </Frame>
+
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                                        <Label Text="Chưa có tài khoản?" TextColor="DarkGray" FontSize="Small"/> 
+
+                                        <Button Text="Đăng ký" BackgroundColor="Transparent" FontAttributes="Bold" FontSize="Small" TextColor="{x:StaticResource TextColorH}" VerticalOptions="Start" TranslationY="-15" Command="{Binding OnRegisterAccountCommand}"/>
+                                         
+                                    </StackLayout>
+                            
+                                    <StackLayout Margin="0,0,0,0" Padding="0">
+                                        <Grid>
+                                            <BoxView BackgroundColor="DarkGray" HeightRequest="1" WidthRequest="150"  HorizontalOptions="Center" VerticalOptions="Center"/>
+                                            <Frame BackgroundColor="White" HeightRequest="45" WidthRequest="45" CornerRadius="45" HasShadow="False" BorderColor="DarkGray" Margin="0" HorizontalOptions="Center" Padding="0">
+                                                <Label Text="OR" TextColor="DarkGray" FontSize="Small" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                            </Frame>
+                                        </Grid>
+                                     </StackLayout>
+
+                                    <StackLayout Margin="0,25" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                                        <Frame BackgroundColor="White" HeightRequest="45" WidthRequest="45" CornerRadius="70" HasShadow="False" BorderColor="DarkGray" Margin="0" HorizontalOptions="Center" Padding="0">
+                                            <Image Source="facebook.png" Aspect="AspectFill" Margin="0"/>
+                                        </Frame>
+                                        <Frame BackgroundColor="White" HeightRequest="45" WidthRequest="45" CornerRadius="70" HasShadow="False" BorderColor="DarkGray" Margin="0" HorizontalOptions="Center" Padding="0">
+                                            <Image Source="google.jpg" Aspect="AspectFill" Margin="0"/>
+                                        </Frame>
+                                    </StackLayout>
+
+                                </StackLayout>
+
+
+                            </StackLayout>
+
+                        </Frame>
+                    </StackLayout>
+                </Grid>
+            </StackLayout>
+
+             <Grid AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" BackgroundColor="{x:StaticResource TextColorH}" Opacity="0.8" IsVisible="{Binding IsBusy}">
+                 <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                     <ActivityIndicator IsRunning="{Binding IsBusy}" Color="White"></ActivityIndicator>
+                     <Label Text="Vui lòng đợi trong giây lát..." FontSize="30" Style="{x:StaticResource LabelWellcomeStyle}" TextColor="White" FontAttributes="Bold" HorizontalTextAlignment="Center"></Label>
+                 </StackLayout>
+             </Grid>
+         </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

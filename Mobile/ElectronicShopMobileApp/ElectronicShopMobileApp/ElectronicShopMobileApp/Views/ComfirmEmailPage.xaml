@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ElectronicShopMobileApp.Views.ComfirmEmailPage"
+             xmlns:Controls="clr-namespace:ElectronicShopMobileApp.Controls"
+             xmlns:Fonts="clr-namespace:ElectronicShopMobileApp.Assets.Font"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+       <AbsoluteLayout>
+       <Grid AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+           
+
+               <Image Source="bgMess.jpg" Aspect="Fill">
+
+               </Image>
+               <ScrollView>
+                   <StackLayout TranslationY="170" BackgroundColor="White" Padding="10">
+                       <Label Text="Xác thực Email" Style="{x:StaticResource LabelWellcomeStyle}" Margin="0"></Label>
+                       <Label Text="{Binding Email, StringFormat='Vui lòng kiểm tra lại mã OTP, chúng tôi đã gứi đến {0}'}" ></Label>
+
+                       <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,15,0,0">
+                           <StackLayout.Resources>
+                               <Style TargetType="Controls:CustomEntry">
+                                   <Setter Property="BackgroundColor" Value="WhiteSmoke"></Setter>
+                                   <Setter Property="WidthRequest" Value="50"></Setter> 
+                                   <Setter Property="HeightRequest" Value="50"></Setter> 
+                                   <Setter Property="HorizontalTextAlignment" Value="Center"></Setter> 
+                                   <Setter Property="Keyboard" Value="Numeric"></Setter>
+                                   <Setter Property="FontFamily" Value="Arial"></Setter>
+                                   <Setter Property="IsCurvedCornersEnabled" Value="True"></Setter>
+                                   <Setter Property="FontSize" Value="20"></Setter>
+                                   <Setter Property="TextColor" Value="{x:StaticResource TextColorH}"></Setter>
+                                   <Setter Property="Margin" Value="0"></Setter> 
+                               </Style>
+                               <Style TargetType="Frame">
+                                   <Setter Property="BorderColor" Value="Gray"></Setter>
+                                   <Setter Property="CornerRadius" Value="10"></Setter>
+                                   <Setter Property="Margin" Value="6"></Setter>
+                               </Style>
+                           </StackLayout.Resources>   
+
+                           <Frame  Padding="0" HasShadow="True">
+                               <Controls:CustomEntry x:Name="txt1" Text="{Binding Txt1}" TextChanged="txt1_TextChanged">  
+                                </Controls:CustomEntry>
+                           </Frame>
+
+                           <Frame  Padding="0" HasShadow="True">
+                               <Controls:CustomEntry x:Name="txt2" Text="{Binding Txt2}" TextChanged="txt2_TextChanged">  
+                                </Controls:CustomEntry>
+                           </Frame>
+
+                           <Frame  Padding="0" HasShadow="True">
+                               <Controls:CustomEntry x:Name="txt3" Text="{Binding Txt3}" TextChanged="txt3_TextChanged">  
+                                </Controls:CustomEntry>
+                           </Frame>
+
+                           <Frame  Padding="0" HasShadow="True">
+                               <Controls:CustomEntry x:Name="txt4" Text="{Binding Txt4}">  
+                                </Controls:CustomEntry>
+                           </Frame>
+
+                       </StackLayout> 
+
+                       <Frame Padding="0" HeightRequest="50" Margin="0,20,0,0">
+                           <Grid>
+                               <Image Source="radient.jpg" Aspect="Fill"></Image>
+                               <Button Text="XÁC THỰC" Command="{Binding OnComfirmEmailCommand}"  BackgroundColor="Transparent" FontSize="20" TextColor="White">
+                                     <Button.Style>
+                                        <Style TargetType="Button"> 
+                                            <Style.Triggers>
+                                                <Trigger TargetType="Button"
+                                                        Property="IsPressed" Value="True"> 
+                                                    <Setter Property="TextColor" Value="Black" />  
+                                                </Trigger>  
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style> 
+                                </Button>
+
+                           </Grid>
+                       </Frame>
+                    
+                       <Button Text="Tôi chưa nhận được mã OTP" TextColor="Blue" BackgroundColor="Transparent" Margin="0,-10,0,0" Command="{Binding OnReLoadOTPCommand}">
+                           <Button.Style>
+                                <Style TargetType="Button"> 
+                                        <Style.Triggers>
+                                            <Trigger TargetType="Button"
+                                                    Property="IsPressed" Value="True"> 
+                                                <Setter Property="TextColor" Value="{x:StaticResource TextColorH}" /> 
+                                            </Trigger> 
+                                        </Style.Triggers>
+                                    </Style>
+                           </Button.Style>
+                       </Button>
+
+                       <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"></ActivityIndicator>
+                        <Label Text="Vui lòng đợi trong giây lát..." IsVisible="{Binding IsBusy}" Style="{x:StaticResource LabelTitleStyle}" HorizontalOptions="Center"></Label>
+
+                   </StackLayout>
+               </ScrollView>
+           </Grid>
+           
+            <Frame AbsoluteLayout.LayoutBounds="0,0,1,45"
+                           AbsoluteLayout.LayoutFlags="WidthProportional,YProportional"
+                       HasShadow="True"
+                       Padding="10,5,10,5" BackgroundColor="Transparent">
+                 <Grid BackgroundColor="Transparent">
+                        <Grid.ColumnDefinitions> 
+                            <ColumnDefinition Width="auto"></ColumnDefinition> 
+                            <ColumnDefinition></ColumnDefinition> 
+                        </Grid.ColumnDefinitions>
+
+                    
+                        <ImageButton 
+                                        BackgroundColor="Transparent"
+                                Grid.Column="0"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Start"
+                            WidthRequest="30"
+                                        Command="{Binding OnComeBackCommand}">
+                                <ImageButton.Source>
+                                <FontImageSource Color="{x:StaticResource TextColorH}" Size="30"
+                                     
+                                                    FontFamily="UserIcon"
+                                                    Glyph="{x:Static Fonts:FontIcons.PencilOutline}">
+                        
+                                </FontImageSource>
+                            </ImageButton.Source>
+                        </ImageButton> 
+
+                        <Label Text="Xác thực" Grid.Column="1"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Start"
+                                FontSize="20"
+                                TextColor="{x:StaticResource TextColorH}"
+                                Margin="10,0,10,0"></Label>
+                 
+
+                </Grid>         
+            </Frame>
+       </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

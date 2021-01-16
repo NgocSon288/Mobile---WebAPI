@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ElectronicShopMobileApp.Views.CartPage"
+             x:Name="MyCartPage"
+             xmlns:Fonts="clr-namespace:ElectronicShopMobileApp.Assets.Font"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content> 
+           <AbsoluteLayout>
+                <Grid AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition/>
+                        <RowDefinition Height="auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+
+                    <Frame AbsoluteLayout.LayoutBounds="0,0,1,45"
+                           AbsoluteLayout.LayoutFlags="WidthProportional,YProportional"
+                       HasShadow="True"
+                       Padding="10,5,10,5">
+                            <Grid  >
+                            <Grid.ColumnDefinitions> 
+                                <ColumnDefinition Width="auto"></ColumnDefinition> 
+                                <ColumnDefinition></ColumnDefinition> 
+                            </Grid.ColumnDefinitions>
+
+                    
+                            <ImageButton 
+                                         BackgroundColor="Transparent"
+                                   Grid.Column="0"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Start"
+                               WidthRequest="30"
+                                         Command="{Binding OnComeBackCommand}">
+                                 <ImageButton.Source>
+                                    <FontImageSource Color="{x:StaticResource TextColorH}" Size="30"
+                                     
+                                                     FontFamily="UserIcon"
+                                                     Glyph="{x:Static Fonts:FontIcons.ArrowLeft}">
+                        
+                                    </FontImageSource>
+                                </ImageButton.Source>
+                            </ImageButton> 
+
+                            <Label Text="{Binding CartItemSQLites.Count, StringFormat='Giỏ Hàng ({0} Sản phẩm)'}" Grid.Column="1"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   FontSize="20"
+                                   TextColor="{x:StaticResource TextColorH}"
+                                   Margin="10,0,10,0"></Label>
+                 
+
+                    </Grid>         
+                        </Frame>
+            
+
+                    <Grid Grid.Row="1">
+
+                       
+
+                       <Grid>
+                           <ScrollView VerticalScrollBarVisibility="Never">
+                                <StackLayout Padding="0,0,0,20">
+                                    <ListView ItemsSource="{Binding CartItemSQLites}" HasUnevenRows="True" SeparatorColor="Black" ItemSelected="ListView_ItemSelected" x:Name="listItem">
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <ViewCell>
+                                            
+                                                            <Grid Margin="10,30,10,0">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="auto"></RowDefinition>
+                                                                    <RowDefinition Height="auto"></RowDefinition>
+                                                                    <RowDefinition Height="auto"></RowDefinition>
+                                                                </Grid.RowDefinitions>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="70"></ColumnDefinition>
+                                                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                                                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                                                                </Grid.ColumnDefinitions>
+                                                                <Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" HeightRequest="80" WidthRequest="60" VerticalOptions="Start">
+                                                                    <Image Source="{Binding Image}" Aspect="Fill" >
+                                                                        <Image.GestureRecognizers>
+                                                                            <TapGestureRecognizer 
+                                                                            Command="{Binding BindingContext.OnImageClickedCommand, Source={x:Reference Name=MyCartPage}}"
+                                                                            CommandParameter="{Binding .}">
+
+                                                                            </TapGestureRecognizer>
+                                                                        </Image.GestureRecognizers>
+                                                                    </Image> 
+                                                                </Grid>
+                                                                <ImageButton   
+                                                                            Grid.Column="2"
+                                                                            Grid.Row="2"
+                                                                           VerticalOptions="Center"
+                                                                           HorizontalOptions="End"
+                                                                           WidthRequest="30"
+                                                                            Command="{Binding BindingContext.OnChooseToBuyCheckBoxCommand, Source={x:Reference Name=MyCartPage}}"
+                                                                            CommandParameter="{Binding .}">
+                                                                    <ImageButton.Source>
+                                                                        <FontImageSource Color="DarkOrange" Size="30"
+                                     
+                                                                                            FontFamily="UserIcon"
+                                                                                            Glyph="{Binding IsSelected, Converter={x:StaticResource ConvertBooleanToCheckIcon}}">
+                        
+                                                                        </FontImageSource>
+                                                                    </ImageButton.Source> 
+                                                                </ImageButton>
+                                                
+                                                            <Label Text="{Binding DisplayName}" TextColor="Black" FontAttributes="Bold" FontSize="15" Grid.Column="1" Grid.Row="0"></Label>
+                                                             <StackLayout Grid.Column="1" Grid.Row="1" Orientation="Horizontal" Grid.ColumnSpan="2">
+                                                                    <Label Text="{Binding Price, Converter={x:StaticResource ConvertDecimalToPriceString}, StringFormat='{0} đ'}"  TextColor="Red"  ></Label>
+                                                                    <Label Text="{Binding DelPrice, Converter={x:StaticResource ConvertDecimalToPriceString}, StringFormat='{0} đ'}" TextColor="Gray"  TextDecorations="Strikethrough"></Label>
+                                                             </StackLayout>
+                                                                <StackLayout Orientation="Horizontal" Grid.Column="1" Grid.Row="2" >
+                                                                     <ImageButton WidthRequest="30" BackgroundColor="White" Grid.Row="0" Source="decrease.png"  Margin="0,0,10,10" 
+                                                                        Command="{Binding BindingContext.OnDecreaseCountChangedClickedCommand, Source={x:Reference Name=MyCartPage}}" Grid.Column="0"
+                                                                        CommandParameter="{Binding .}">
+                                                                    </ImageButton >
+                                                                        <Frame HasShadow="True" Grid.Column="1" Grid.Row="0" Padding="0" Margin="0,0,10,10">
+                                                                        <Label Text="{Binding Count}" FontSize="16" WidthRequest="30"
+                                                                               TextColor="DarkRed"
+                                                                               HorizontalTextAlignment="Center"
+                                                                               VerticalTextAlignment="Center">
+                                                                        </Label>
+                                                                        </Frame>
+                                                                        <ImageButton WidthRequest="30" BackgroundColor="White" Grid.Column="2" Grid.Row="0" Source="encrease.png"  Margin="0,0,10,10" 
+                                                                                Command="{Binding BindingContext.OnIncreaseCountChangedClickedCommand, Source={x:Reference Name=MyCartPage}}"
+                                                                                CommandParameter="{Binding .}"
+                                                                                >
+                                                                        </ImageButton>
+                                                
+                                                                </StackLayout>
+                                                            <Button Text="X" Grid.Row="0" Grid.Column="2" BackgroundColor="Transparent" TextColor="Red" FontSize="20" FontAttributes="Bold" HorizontalOptions="End"  WidthRequest="40" HeightRequest="40"
+                                                                    Command="{Binding BindingContext.OnDeleteCartItemClickedCommand, Source={x:Reference Name=MyCartPage}}"
+                                                                    CommandParameter="{Binding .}" >
+                                        
+                                                            </Button>
+                                                        </Grid>
+                                       
+                                            </ViewCell>
+                                    </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                           </ScrollView>
+                       </Grid>
+
+                         <Grid IsVisible="{Binding CartItemSQLites.Count, Converter={x:StaticResource ConvertCartItemListToVisibleBooleean}}">
+                            <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="10">
+                                <Image Source="emptycart.png" WidthRequest="250"></Image>
+                                <Label Text="Không có sản phẩm nào trong giỏ hàng của bạn." Style="{x:StaticResource LabelTitleStyle}" TextColor="Black"></Label> 
+                                
+                                <Frame Padding="0" HeightRequest="50" Margin="0,20,0,0">
+                                   <Grid>
+                                       <Image Source="radient.jpg" Aspect="Fill"></Image>
+                                       <Button Text="Tiếp tục mua sắm" Command="{Binding OnGoHomeCommand}"  BackgroundColor="Transparent" FontSize="20" TextColor="White">
+                                             <Button.Style>
+                                                <Style TargetType="Button"> 
+                                                    <Style.Triggers>
+                                                        <Trigger TargetType="Button"
+                                                                Property="IsPressed" Value="True"> 
+                                                            <Setter Property="TextColor" Value="Black" />  
+                                                        </Trigger>  
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style> 
+                                        </Button>
+
+                                   </Grid>
+                               </Frame>
+                            </StackLayout>
+                        </Grid>
+
+                    </Grid>
+
+                <Frame Grid.Row="2" Padding="0" Margin="0" HasShadow="True">
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>      
+                                                               
+                        <Grid Grid.Column="0" Grid.ColumnSpan="3" BackgroundColor="{x:StaticResource TextColorH}"> 
+                        </Grid>
+                        
+                        <StackLayout Orientation="Horizontal">
+
+                                <ImageButton  
+                                            BackgroundColor="Transparent"
+                                    Grid.Column="1"
+                                VerticalOptions="Center"
+                                HorizontalOptions="End"
+                                WidthRequest="30"
+                                        Command="{Binding BindingContext.OnChooseToBuyAllCheckBoxCommand, Source={x:Reference Name=MyCartPage}}" >
+                                <ImageButton.Source>
+                                    <FontImageSource Color="White" Size="30"
+                                     
+                                                        FontFamily="UserIcon"
+                                                        Glyph="{Binding IsSelectAll, Converter={x:StaticResource ConvertBooleanToCheckIcon}}">
+                        
+                                    </FontImageSource>
+                                </ImageButton.Source> 
+                            </ImageButton>
+
+                            <Label Text="Tất cả" TextColor="White" FontSize="17" VerticalOptions="Center" VerticalTextAlignment="Center">
+
+                            </Label>
+
+                        </StackLayout>
+
+                        <Label Text="{Binding PriceTotal, Converter={x:StaticResource ConvertDecimalToPriceString}, StringFormat='{0} đ'}"
+                               VerticalOptions="Center"
+                               HorizontalOptions="End"
+                               TextColor="White"
+                               Margin="0,0,0,0"
+                                    VerticalTextAlignment="Center"
+                               FontSize="17"
+                               HorizontalTextAlignment="End"
+                                    Grid.Column="1">
+
+                        </Label>
+
+                        <Frame Padding="0" HeightRequest="50" Margin="0,0,0,0" Grid.Column="2">
+                           <Grid>
+                               <Image Source="radient.jpg" Aspect="Fill"></Image>
+                               <Button Text="Mua hàng"  Command="{Binding BindingContext.OnOrderCommand, Source={x:Reference Name=MyCartPage}}"  BackgroundColor="Transparent" FontSize="20" TextColor="White">
+                                     <Button.Style>
+                                        <Style TargetType="Button"> 
+                                            <Style.Triggers>
+                                                <Trigger TargetType="Button"
+                                                        Property="IsPressed" Value="True"> 
+                                                    <Setter Property="TextColor" Value="Black" />  
+                                                </Trigger>  
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style> 
+                                </Button>
+
+                           </Grid>
+                       </Frame>
+
+
+                    </Grid>
+                </Frame>
+            </Grid>
+                <Grid AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" BackgroundColor="{x:StaticResource TextColorH}" Opacity="0.8" IsVisible="{Binding IsBusy}">
+                     <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                         <ActivityIndicator IsRunning="{Binding IsBusy}" Color="White"></ActivityIndicator>
+                         <Label Text="Vui lòng đợi trong giây lát..." FontSize="30" Style="{x:StaticResource LabelWellcomeStyle}" TextColor="White" FontAttributes="Bold" HorizontalTextAlignment="Center"></Label>
+                     </StackLayout>
+                </Grid>
+           </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

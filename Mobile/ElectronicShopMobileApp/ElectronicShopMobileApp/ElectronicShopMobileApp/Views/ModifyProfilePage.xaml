@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ElectronicShopMobileApp.Views.ModifyProfilePage"
+             xmlns:Controls="clr-namespace:ElectronicShopMobileApp.Controls"
+             xmlns:Fonts="clr-namespace:ElectronicShopMobileApp.Assets.Font"
+             Title="Thay đổi mật khẩu">
+    <ContentPage.Content>
+        <ScrollView VerticalScrollBarVisibility="Never">
+
+        
+            <StackLayout Padding="10,10,10,10">
+                <Label Text="Tài khoản: " Style="{x:StaticResource LabelTitleStyle}"></Label> 
+                <Frame BackgroundColor="Transparent" BorderColor="LightGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                    <StackLayout Orientation="Horizontal">
+                        <Frame BackgroundColor="LightGray" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                            <Image Aspect="AspectFill" Margin="0">
+                                <Image.Source>
+                                    <FontImageSource Color="{x:StaticResource TextColorIcon}" Size="30"
+                                                     FontFamily="UserIcon"
+                                                     Glyph="{x:Static Fonts:FontIcons.Account}">
+
+                                    </FontImageSource>
+                                </Image.Source>
+                            </Image>
+                        </Frame>
+
+                        <Controls:CustomEntry Placeholder="Tài khoản" TextColor="{x:StaticResource TextColorH}" FontAttributes="None" HorizontalOptions="FillAndExpand" IsEnabled="False" Margin="0,0,20,0" Text="{Binding UserName}"/>
+                    </StackLayout>
+                </Frame>
+                <Label Text="Mật khẩu hiện tại" Style="{x:StaticResource LabelTitleStyle}" Margin="0,10,0,0"></Label> 
+                <Frame BackgroundColor="Transparent" BorderColor="LightGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                    <StackLayout Orientation="Horizontal">
+                        <Frame BackgroundColor="LightGray" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                            <Image Aspect="AspectFill" Margin="0">
+                                <Image.Source>
+                                    <FontImageSource Color="{x:StaticResource TextColorIcon}" Size="30"
+                                                     FontFamily="UserIcon"
+                                                     Glyph="{x:Static Fonts:FontIcons.LockCheck}">
+
+                                    </FontImageSource>
+                                </Image.Source>
+                            </Image>
+                        </Frame>
+
+                        <Controls:CustomEntry Placeholder="Mật khẩu hiện tại..." TextColor="{x:StaticResource TextColorH}" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0" Text="{Binding PassWord}" IsPassword="True"/>
+                    </StackLayout>
+                </Frame>
+                <Label Text="Mật khẩu mới: " Style="{x:StaticResource LabelTitleStyle}" Margin="0,10,0,0" ></Label> 
+                <Frame BackgroundColor="Transparent" BorderColor="LightGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                    <StackLayout Orientation="Horizontal">
+                        <Frame BackgroundColor="LightGray" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                            <Image Aspect="AspectFill" Margin="0">
+                                <Image.Source>
+                                    <FontImageSource Color="{x:StaticResource TextColorIcon}" Size="30"
+                                                     FontFamily="UserIcon"
+                                                     Glyph="{x:Static Fonts:FontIcons.LockReset}">
+
+                                    </FontImageSource>
+                                </Image.Source>
+                            </Image>
+                        </Frame>
+
+                        <Controls:CustomEntry Placeholder="Mật khẩu mới" IsPassword="True" TextColor="{x:StaticResource TextColorH}" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0" Text="{Binding NewPassWord}"/>
+                    </StackLayout>
+                </Frame>
+                <Label Text="Nhập lại mật khẩu: " Style="{x:StaticResource LabelTitleStyle}" Margin="0,10,0,0"></Label> 
+                <Frame BackgroundColor="Transparent" BorderColor="LightGray" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                    <StackLayout Orientation="Horizontal">
+                        <Frame BackgroundColor="LightGray" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
+                            <Image Aspect="AspectFill" Margin="0">
+                                <Image.Source>
+                                    <FontImageSource Color="{x:StaticResource TextColorIcon}" Size="30"
+                                                     FontFamily="UserIcon"
+                                                     Glyph="{x:Static Fonts:FontIcons.FileReplace}">
+
+                                    </FontImageSource>
+                                </Image.Source>
+                            </Image>
+                        </Frame>
+
+                        <Controls:CustomEntry Placeholder="Nhập lại mật khẩu" IsPassword="True" TextColor="{x:StaticResource TextColorH}" FontAttributes="None" HorizontalOptions="FillAndExpand" Margin="0,0,20,0" Text="{Binding ConfirmNewPassWord}"/>
+                    </StackLayout>
+                </Frame>  
+
+                 <Frame Padding="0" HeightRequest="50" Margin="0,0,0,0">
+                               <Grid>
+                                   <Image Source="radient.jpg" Aspect="Fill"></Image>
+                                   <Button Text="CẬP NHẬT" Command="{Binding OnUpdatePasswordClickCommand}"  BackgroundColor="Transparent" FontSize="20" TextColor="White">
+                                         <Button.Style>
+                                            <Style TargetType="Button"> 
+                                                <Style.Triggers>
+                                                    <Trigger TargetType="Button"
+                                                            Property="IsPressed" Value="True"> 
+                                                        <Setter Property="TextColor" Value="Black" />  
+                                                    </Trigger>  
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style> 
+                                    </Button>
+
+                               </Grid>
+                           </Frame>
+
+                <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"></ActivityIndicator>
+                <Label Text="Vui lòng đợi trong giây lát..." IsVisible="{Binding IsBusy}" Style="{x:StaticResource LabelTitleStyle}" HorizontalOptions="Center"></Label>
+      
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

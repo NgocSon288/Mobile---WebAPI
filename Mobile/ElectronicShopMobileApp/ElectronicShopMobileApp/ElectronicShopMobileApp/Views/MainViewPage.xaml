@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="ElectronicShopMobileApp.Views.MainViewPage"
+            xmlns:Views="clr-namespace:ElectronicShopMobileApp.Views"
+            xmlns:Fonts="clr-namespace:ElectronicShopMobileApp.Assets.Font"
+            NavigationPage.HasNavigationBar="False"
+            Background="white"
+            TranslationY="0">
+
+    <Views:HomePages  IconImageSource="home1.npg" TranslationY="0"/>
+     
+    <Views:NotificationPage  IconImageSource="bell1.png" TranslationY="0"/>
+
+    <Views:CustomerPage IconImageSource="user1.png" TranslationY="0"/>
+</TabbedPage>
