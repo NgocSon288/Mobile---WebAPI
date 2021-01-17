@@ -12,14 +12,14 @@ namespace ElectronicShopAPI.Assets.Contains
 {
     public static class Const
     {
-        public static readonly string AdvertisementImagePath    = @"http://HuynhNgocSon1694.somee.com/Assets/Images/Advertisement/";
-        public static readonly string CategoryImagePath         = @"http://HuynhNgocSon1694.somee.com/Assets/Images/Category/";
-        public static readonly string CustomerImagePath         = @"http://HuynhNgocSon1694.somee.com/Assets/Images/Customer/";
-        public static readonly string AccessoriesImagePath      = @"http://HuynhNgocSon1694.somee.com/Assets/Images/Product/Accessories/";     
-        public static readonly string CellphoneImagePath        = @"http://HuynhNgocSon1694.somee.com/Assets/Images/Product/Cellphone/";
-        public static readonly string LaptopImagePath           = @"http://HuynhNgocSon1694.somee.com/Assets/Images/Product/Laptop/";
-        public static readonly string SmartWatchImagePath       = @"http://HuynhNgocSon1694.somee.com/Assets/Images/Product/SmartWatch/";
-        public static readonly string TabletImagePath           = @"http://HuynhNgocSon1694.somee.com/Assets/Images/Product/Tablet/";
+        public static readonly string AdvertisementImagePath    = @"http://HuynhNgocSon18521694.somee.com/Assets/Images/Advertisement/";
+        public static readonly string CategoryImagePath         = @"http://HuynhNgocSon18521694.somee.com/Assets/Images/Category/";
+        public static readonly string CustomerImagePath         = @"http://HuynhNgocSon18521694.somee.com/Assets/Images/Customer/";
+        public static readonly string AccessoriesImagePath      = @"http://HuynhNgocSon18521694.somee.com/Assets/Images/Product/Accessories/";     
+        public static readonly string CellphoneImagePath        = @"http://HuynhNgocSon18521694.somee.com/Assets/Images/Product/Cellphone/";
+        public static readonly string LaptopImagePath           = @"http://HuynhNgocSon18521694.somee.com/Assets/Images/Product/Laptop/";
+        public static readonly string SmartWatchImagePath       = @"http://HuynhNgocSon18521694.somee.com/Assets/Images/Product/SmartWatch/";
+        public static readonly string TabletImagePath           = @"http://HuynhNgocSon18521694.somee.com/Assets/Images/Product/Tablet/";
         public static readonly string ReplaceCharacter           = "IE307_L11";
 
 

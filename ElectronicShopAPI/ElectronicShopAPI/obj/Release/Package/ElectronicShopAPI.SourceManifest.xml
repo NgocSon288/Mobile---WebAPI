@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<sitemanifest>
-  <IisApp path="C:\zMyDesktop\HK1-năm 3\Mobile - IE307.L11\Finaly\WebApi\ElectronicShopAPI\ElectronicShopAPI\ElectronicShopAPI\obj\Release\Package\PackageTmp" />
-  <setAcl path="C:\zMyDesktop\HK1-năm 3\Mobile - IE307.L11\Finaly\WebApi\ElectronicShopAPI\ElectronicShopAPI\ElectronicShopAPI\obj\Release\Package\PackageTmp" setAclResourceType="Directory" />
-  <setAcl path="C:\zMyDesktop\HK1-năm 3\Mobile - IE307.L11\Finaly\WebApi\ElectronicShopAPI\ElectronicShopAPI\ElectronicShopAPI\obj\Release\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />
-</sitemanifest>

@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<parameters>
-  <parameter name="ElectronicDBContext-Web.config Connection String" description="ElectronicDBContext Connection String used in web.config by the application to access the database." defaultValue="data source=.\sqlexpress;initial catalog=ElectronicShop;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="C:\\zMyDesktop\\HK1-năm\ 3\\Mobile\ -\ IE307\.L11\\Finaly\\WebApi\\ElectronicShopAPI\\ElectronicShopAPI\\ElectronicShopAPI\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='ElectronicDBContext']/@connectionString" />
-  </parameter>
-</parameters>
